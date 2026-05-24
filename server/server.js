@@ -2,8 +2,12 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 dotenv.config();
+// routes
 
-
+import authRoutes from './routes/auth.js';
+import entryRoutes from './routes/entries.js';
+import connectDB from './config/connectDB.js';
+import aiRoutes from './routes/ai.js';
 
 const app = express();
 
@@ -11,12 +15,10 @@ const app = express();
 app.use(cors({origin : "http://localhost:5173"}));
 app.use(express.json());
 
-// routes
-import authRoutes from './routes/auth.js';
-import entryRoutes from './routes/entries.js';
-import connectDB from './config/connectDB.js';
+
 app.use('/api/auth', authRoutes);
 app.use('/api/entries', entryRoutes);
+app.use('/api/ai', aiRoutes);
 
 //health check
 app.get('/api/health', (req, res) => {
