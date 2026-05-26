@@ -9,6 +9,7 @@ const Signup = () => {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -81,19 +82,39 @@ const Signup = () => {
           </div>
 
           <div>
-            <label className="text-[10px] tracking-[0.15em] text-[#666] uppercase block mb-2">
-              password
-            </label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              required
-              placeholder="at least 6 characters"
-              className="w-full bg-white/[0.03] border border-white/8 rounded-xl px-4 py-3 text-sm text-[#e8e4de] placeholder-[#444] focus:outline-none focus:border-[#c9a96e]/40 transition-all"
-            />
-          </div>
+  <label className="text-[10px] tracking-[0.15em] text-[#666] uppercase block mb-2">
+    password
+  </label>
+  <div className="relative">
+    <input
+      type={showPassword ? 'text' : 'password'}
+      name="password"
+      value={form.password}
+      onChange={handleChange}
+      required
+      placeholder="••••••••"
+      className="w-full bg-white/[0.03] border border-white/8 rounded-xl px-4 py-3 text-sm text-[#e8e4de] placeholder-[#444] focus:outline-none focus:border-[#c9a96e]/40 transition-all pr-10"
+    />
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#444] hover:text-[#888] transition-all"
+    >
+      {showPassword ? (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+          <line x1="1" y1="1" x2="23" y2="23"/>
+        </svg>
+      ) : (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      )}
+    </button>
+  </div>
+</div>
 
           {/* Error */}
           {error && (
@@ -120,7 +141,7 @@ const Signup = () => {
         <p className="text-center text-xs text-[#444] mt-6">
           already have an account?{' '}
           <Link to="/login" className="text-[#c9a96e]/70 hover:text-[#c9a96e] transition-all">
-            sign in
+            Login
           </Link>
         </p>
 

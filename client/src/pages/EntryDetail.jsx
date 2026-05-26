@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import API from '../api/axios.js';
-import { moodColors } from '../utils/moodColors.js';
-
-const getMoodColor = (mood) => moodColors[mood] || '#9ca3af';
+import Navbar from '../components/Navbar.jsx';
+import MoodBadge from '../components/MoodBadge.jsx';
 
 const EntryDetail = () => {
   const navigate = useNavigate();
@@ -11,6 +10,7 @@ const EntryDetail = () => {
   const [entry, setEntry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     fetchEntry();
@@ -27,6 +27,15 @@ const EntryDetail = () => {
     }
   };
 
+  const handleDelete = async () => {
+  try {
+    await API.delete(`/entries/${id}`);
+    navigate('/dashboard');
+  } catch (err) {
+    setError('could not delete this entry');
+  }
+};
+
   const formatDate = (dateStr) => {
     return new Date(dateStr).toLocaleDateString('en-IN', {
       day: 'numeric', month: 'long', year: 'numeric',
@@ -37,21 +46,7 @@ const EntryDetail = () => {
     <div className="min-h-screen bg-[#0d0d0f] text-[#e8e4de]">
 
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/5">
-        <h1
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          className="text-[#c9a96e] text-2xl font-light tracking-widest italic cursor-pointer"
-          onClick={() => navigate('/')}
-        >
-          Candor
-        </h1>
-        <button
-          onClick={() => navigate('/dashboard')}
-          className="text-xs text-[#444] hover:text-[#666] transition-all"
-        >
-          ← back to entries
-        </button>
-      </nav>
+      <Navbar showBack backLabel="back to entries" backPath="/dashboard" />
 
       <div className="max-w-2xl mx-auto px-8 py-12">
 
@@ -88,20 +83,18 @@ const EntryDetail = () => {
 
             {/* Date + mood row */}
             <div className="flex items-center justify-between mb-8">
-              <span className="text-xs text-[#444]">
-                {formatDate(entry.createdAt)}
-              </span>
-              <span
-                className="text-[10px] px-3 py-1 rounded-full border"
-                style={{
-                  color: getMoodColor(entry.mood),
-                  borderColor: getMoodColor(entry.mood) + '40',
-                  background: getMoodColor(entry.mood) + '12',
-                }}
-              >
-                {entry.mood}
-              </span>
-            </div>
+  <span className="text-xs text-[#444]">
+    {formatDate(entry.createdAt)}
+  </span>
+  <div className="flex items-center gap-3">
+    <MoodBadge mood={entry.mood} />
+    {entry.aiMoodScore !== null && (
+      <span className="text-[10px] text-[#444]">
+        {entry.aiMoodScore}/10
+      </span>
+    )}
+  </div>
+</div>
 
             {/* Entry text */}
             <div className="mb-8 bg-white/[0.02] border border-white/5 rounded-2xl px-6 py-5">
@@ -125,17 +118,50 @@ const EntryDetail = () => {
                 >
                   {entry.aiSummary}
                 </p>
-                {entry.aiMoodScore && (
+                {entry.aiMoodScore !== null && (
                   <span className="text-[10px] text-[#444]">
-                    mood score: {entry.aiMoodScore}/10
-                  </span>
-                )}
+  mood score: {entry.aiMoodScore}/10
+</span>
+)}
               </div>
             ) : (
               <p className="text-xs text-[#333] italic">
                 not yet reflected upon
               </p>
             )}
+          <div className="mt-12 pt-6 border-t border-white/5 flex justify-between items-center">
+  <button
+    onClick={() => navigate('/dashboard')}
+    className="text-xs text-[#444] hover:text-[#666] transition-all"
+  >
+    ← back to entries
+  </button>
+
+  {!confirmDelete ? (
+    <button
+      onClick={() => setConfirmDelete(true)}
+      className="text-xs text-[#333] hover:text-[#E24B4A]/70 transition-all"
+    >
+      delete entry
+    </button>
+  ) : (
+    <div className="flex items-center gap-4">
+      <span className="text-[10px] text-[#555]">are you sure?</span>
+      <button
+        onClick={handleDelete}
+        className="text-[10px] text-[#E24B4A]/70 hover:text-[#E24B4A] transition-all"
+      >
+        yes, delete
+      </button>
+      <button
+        onClick={() => setConfirmDelete(false)}
+        className="text-[10px] text-[#444] hover:text-[#666] transition-all"
+      >
+        cancel
+      </button>
+    </div>
+  )}
+</div>
 
           </div>
         )}

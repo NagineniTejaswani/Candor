@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../api/axios.js';
+import Navbar from '../components/Navbar.jsx';
+
 
 const WriteEntry = () => {
   const navigate = useNavigate();
@@ -27,26 +29,11 @@ const WriteEntry = () => {
   };
 
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
-
   return (
     <div className="min-h-screen bg-[#0d0d0f] text-[#e8e4de]">
 
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/5">
-        <h1
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          className="text-[#c9a96e] text-2xl font-light tracking-widest italic cursor-pointer"
-          onClick={() => navigate('/')}
-        >
-          Candor
-        </h1>
-        <button
-          onClick={() => navigate('/dashboard')}
-          className="text-xs text-[#444] hover:text-[#666] transition-all"
-        >
-          ← back to entries
-        </button>
-      </nav>
+      <Navbar showBack backLabel="back to entries" backPath="/dashboard" />
 
       <div className="max-w-2xl mx-auto px-8 py-12">
 

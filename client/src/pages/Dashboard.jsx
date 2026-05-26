@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.jsx';
 import API from '../api/axios.js';
-import { moodColors } from '../utils/moodColors.js';
-
-const getMoodColor = (mood) => moodColors[mood] || '#9ca3af';
+import Navbar from '../components/Navbar.jsx';
+import MoodBadge from '../components/MoodBadge.jsx';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -40,11 +37,6 @@ const handleDeleteConfirm = async () => {
   }
 };
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
-
   const formatDate = (dateStr) => {
     return new Date(dateStr).toLocaleDateString('en-IN', {
       day: 'numeric', month: 'long', year: 'numeric'
@@ -55,32 +47,7 @@ const handleDeleteConfirm = async () => {
     <div className="min-h-screen bg-[#0d0d0f] text-[#e8e4de]">
 
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/5">
-        <h1
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          className="text-[#c9a96e] text-2xl font-light tracking-widest italic cursor-pointer"
-          onClick={() => navigate('/')}
-        >
-          Candor
-        </h1>
-          <div className="flex items-center gap-6">
-          <span className="text-xs text-[#555]">
-            welcome, <span className="text-[#888]">{user?.name || 'friend'}</span>
-          </span>
-          <button
-            onClick={() => navigate('/write')}
-            className="px-5 py-2 rounded-full text-xs border border-[#c9a96e]/40 bg-[#c9a96e]/10 text-[#e8c98a] hover:bg-[#c9a96e]/20 transition-all"
-          >
-            + new entry
-          </button>
-          <button
-            onClick={handleLogout}
-            className="text-xs text-[#444] hover:text-[#666] transition-all"
-          >
-            log out
-          </button>
-        </div>
-      </nav>
+      <Navbar showNewEntry showLogout />
 
       <div className="max-w-4xl mx-auto px-8 py-12">
 
@@ -150,16 +117,7 @@ const handleDeleteConfirm = async () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     {/* Mood badge */}
-                    <span
-                      className="text-[10px] px-3 py-1 rounded-full border"
-                      style={{
-                        color: getMoodColor(entry.mood),
-                        borderColor: getMoodColor(entry.mood) + '40',
-                        background: getMoodColor(entry.mood) + '12',
-                      }}
-                    >
-                      {entry.mood}
-                    </span>
+                    <MoodBadge mood={entry.mood} />
 
                     {/* Score */}
                     {entry.aiMoodScore && (
