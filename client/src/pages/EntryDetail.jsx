@@ -43,7 +43,7 @@ const EntryDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0d0f] text-[#e8e4de]">
+    <div className="min-h-screen transition-colors duration-300" style={{background:'var(--bg-primary)',color:'var(--text-primary)'}}>
 
       {/* Navbar */}
       <Navbar showBack backLabel="back to entries" backPath="/dashboard" />
@@ -64,13 +64,13 @@ const EntryDetail = () => {
           <div className="text-center py-20">
             <p
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              className="text-3xl font-light text-[#333] italic mb-4"
+              className="text-3xl font-light theme-text-muted italic mb-4"
             >
               {error}
             </p>
             <button
               onClick={() => navigate('/dashboard')}
-              className="text-xs text-[#444] hover:text-[#666] transition-all"
+              className="text-xs theme-text-muted hover:theme-text-secondary transition-all"
             >
               ← go back
             </button>
@@ -83,13 +83,13 @@ const EntryDetail = () => {
 
             {/* Date + mood row */}
             <div className="flex items-center justify-between mb-8">
-  <span className="text-xs text-[#444]">
+  <span className="text-xs theme-text-muted">
     {formatDate(entry.createdAt)}
   </span>
   <div className="flex items-center gap-3">
     <MoodBadge mood={entry.mood} />
     {entry.aiMoodScore !== null && (
-      <span className="text-[10px] text-[#444]">
+      <span className="text-[10px] theme-text-muted">
         {entry.aiMoodScore}/10
       </span>
     )}
@@ -97,11 +97,11 @@ const EntryDetail = () => {
 </div>
 
             {/* Entry text */}
-            <div className="mb-8 bg-white/[0.02] border border-white/5 rounded-2xl px-6 py-5">
-              <p className="text-sm text-[#c8c4be] leading-relaxed">
+            <div className="mb-8 rounded-2xl px-6 py-5" style={{background:'var(--bg-card)',border:'0.5px solid var(--border)}'}}>
+              <p className="text-sm theme-text leading-relaxed">
                 {entry.text}
               </p>
-            </div>
+            </div> 
 
             {/* Divider */}
             <div className="h-px bg-[#c9a96e]/10 mb-8" />
@@ -109,30 +109,30 @@ const EntryDetail = () => {
             {/* AI reflection */}
             {entry.aiSummary ? (
               <div>
-                <p className="text-[9px] tracking-[0.15em] text-[#c9a96e]/50 uppercase mb-4">
+                <p className="text-[9px] tracking-[0.15em] theme-accent/50 uppercase mb-4">
                   candor reflects
                 </p>
                 <p
                   style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  className="text-xl font-light text-[#c8c4be] leading-relaxed italic mb-6"
+                  className="text-xl font-light theme-text leading-relaxed italic mb-6"
                 >
                   {entry.aiSummary}
                 </p>
                 {entry.aiMoodScore !== null && (
-                  <span className="text-[10px] text-[#444]">
+                  <span className="text-[10px] theme-text-muted">
   mood score: {entry.aiMoodScore}/10
 </span>
 )}
               </div>
             ) : (
-              <p className="text-xs text-[#333] italic">
+              <p className="text-xs theme-text-muted italic">
                 not yet reflected upon
               </p>
             )}
           <div className="mt-12 pt-6 border-t border-white/5 flex justify-between items-center">
   <button
     onClick={() => navigate('/dashboard')}
-    className="text-xs text-[#444] hover:text-[#666] transition-all"
+    className="text-xs theme-text-muted hover:theme-text-secondary transition-all"
   >
     ← back to entries
   </button>
@@ -140,13 +140,13 @@ const EntryDetail = () => {
   {!confirmDelete ? (
     <button
       onClick={() => setConfirmDelete(true)}
-      className="text-xs text-[#333] hover:text-[#E24B4A]/70 transition-all"
+      className="text-xs theme-text-muted hover:text-[#E24B4A]/70 transition-all"
     >
       delete entry
     </button>
   ) : (
     <div className="flex items-center gap-4">
-      <span className="text-[10px] text-[#555]">are you sure?</span>
+      <span className="text-[10px] theme-text-muted">are you sure?</span>
       <button
         onClick={handleDelete}
         className="text-[10px] text-[#E24B4A]/70 hover:text-[#E24B4A] transition-all"
@@ -155,7 +155,7 @@ const EntryDetail = () => {
       </button>
       <button
         onClick={() => setConfirmDelete(false)}
-        className="text-[10px] text-[#444] hover:text-[#666] transition-all"
+        className="text-[10px] theme-text-muted hover:theme-text-secondary transition-all"
       >
         cancel
       </button>

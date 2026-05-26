@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
+import { ThemeProvider } from './context/ThemeContext.jsx';
 import Landing from './pages/Landing.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
@@ -11,22 +12,24 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={
-            <PrivateRoute><Dashboard /></PrivateRoute>
-          } />
-          <Route path="/write" element={
-            <PrivateRoute><WriteEntry /></PrivateRoute>
-          } />
-          <Route path="/entry/:id" element={
-            <PrivateRoute><EntryDetail /></PrivateRoute>
-          } />
-        </Routes>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard" element={
+              <PrivateRoute><Dashboard /></PrivateRoute>
+            } />
+            <Route path="/write" element={
+              <PrivateRoute><WriteEntry /></PrivateRoute>
+            } />
+            <Route path="/entry/:id" element={
+              <PrivateRoute><EntryDetail /></PrivateRoute>
+            } />
+          </Routes>
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

@@ -31,21 +31,21 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0d0f] flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 transition-colors duration-300" style={{background:'var(--bg-primary)'}}>
       <div className="w-full max-w-sm">
 
         {/* Logo */}
         <div className="text-center mb-10">
-          <h1 style={{fontFamily:"'Cormorant Garamond', serif"}} className="text-[#c9a96e] text-4xl font-light tracking-widest italic mb-2">
+          <h1 style={{fontFamily:"'Cormorant Garamond', serif"}} className="theme-accent text-4xl font-light tracking-widest italic mb-2">
   Candor
 </h1>
-          <p className="text-[#555] text-xs">welcome back</p>
+          <p className="theme-text-muted text-xs">welcome back</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label className="text-[10px] tracking-[0.15em] text-[#666] uppercase block mb-2">
+            <label className="text-[10px] tracking-[0.15em] theme-text-secondary uppercase block mb-2">
               email
             </label>
             <input
@@ -55,12 +55,12 @@ const Login = () => {
               onChange={handleChange}
               required
               placeholder="you@example.com"
-              className="w-full bg-white/[0.03] border border-white/8 rounded-xl px-4 py-3 text-sm text-[#e8e4de] placeholder-[#444] focus:outline-none focus:border-[#c9a96e]/40 transition-all"
+              className="w-full bg-white/[0.03] border border-white/8 rounded-xl px-4 py-3 text-sm theme-text placeholder-[#444] focus:outline-none focus:border-[#c9a96e]/40 transition-all"
             />
           </div>
 
           <div>
-  <label className="text-[10px] tracking-[0.15em] text-[#666] uppercase block mb-2">
+  <label className="text-[10px] tracking-[0.15em] theme-text-secondary uppercase block mb-2">
     password
   </label>
   <div className="relative">
@@ -71,12 +71,12 @@ const Login = () => {
       onChange={handleChange}
       required
       placeholder="••••••••"
-      className="w-full bg-white/[0.03] border border-white/8 rounded-xl px-4 py-3 text-sm text-[#e8e4de] placeholder-[#444] focus:outline-none focus:border-[#c9a96e]/40 transition-all pr-10"
+      className="w-full rounded-xl px-4 py-3 text-sm focus:outline-none transition-all" style={{background:'var(--bg-card)',border:'0.5px solid var(--border)',color:'var(--text-primary)'}}
     />
     <button
       type="button"
       onClick={() => setShowPassword(!showPassword)}
-      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#444] hover:text-[#888] transition-all"
+      className="absolute right-3 top-1/2 -translate-y-1/2 theme-text-muted hover:theme-text-secondary transition-all"
     >
       {showPassword ? (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -111,15 +111,15 @@ const Login = () => {
         </form>
 
         {/* Footer */}
-        <p className="text-center text-xs text-[#444] mt-8">
+        <p className="text-center text-xs theme-text-muted mt-8">
           don't have an account?{' '}
-          <Link to="/signup" className="text-[#c9a96e]/70 hover:text-[#c9a96e] transition-all">
+          <Link to="/signup" className="theme-accent/70 hover:theme-accent transition-all">
             create one
           </Link>
         </p>
 
         <p className="text-center mt-8">
-          <Link to="/" className="text-[10px] text-[#333] hover:text-[#555] transition-all">
+          <Link to="/" className="text-[10px] theme-text-muted hover:theme-text-muted transition-all">
             ← back to candor
           </Link>
         </p>

@@ -84,18 +84,18 @@ const Landing = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0d0d0f] text-[#e8e4de] flex flex-col">
+    <div className="min-h-screen bg-[#0d0d0f] theme-text flex flex-col">
 
       {/* Navbar */}
       <nav className="flex items-center justify-between px-8 py-5 border-b border-[#c9a96e]/10">
         <div className="flex items-center gap-3">
-          <span style={{fontFamily:"'Cormorant Garamond', serif"}} className="text-[#c9a96e] text-2xl font-light tracking-widest italic">Candor</span>
-          <span className="text-[#666] text-xs">/ honest reflection</span>
+          <span style={{fontFamily:"'Cormorant Garamond', serif"}} className="theme-accent text-2xl font-light tracking-widest italic">Candor</span>
+          <span className="theme-text-secondary text-xs">/ honest reflection</span>
         </div>
         <div className="flex gap-3">
           <button
             onClick={() => navigate('/login')}
-            className="px-5 py-2 rounded-full text-xs border border-[#c9a96e]/25 text-[#c9a96e] hover:bg-[#c9a96e]/10 transition-all"
+            className="px-5 py-2 rounded-full text-xs border border-[#c9a96e]/25 theme-accent hover:bg-[#c9a96e]/10 transition-all"
           >
             log in
           </button>
@@ -114,7 +114,7 @@ const Landing = () => {
   
   {/* Left side — text */}
   <div className="flex-1 text-left">
-    <p className="text-[10px] tracking-[0.2em] text-[#c9a96e]/60 uppercase mb-5">
+    <p className="text-[10px] tracking-[0.2em] theme-accent/60 uppercase mb-5">
       your private space to feel
     </p>
     <h1 
@@ -123,12 +123,12 @@ const Landing = () => {
 >
   Write what you<br />
   can't say to<br />
-  <span className="italic text-[#c9a96e]">anyone.</span>
+  <span className="italic theme-accent">anyone.</span>
 </h1>
-    <p className="text-sm text-[#666] leading-relaxed mb-8 max-w-sm">
+    <p className="text-sm theme-text-secondary leading-relaxed mb-8 max-w-sm">
       Most feelings stay locked inside — not because you don't want to share,
       but because the world isn't always safe to be honest in.
-      <span className="text-[#888]"> Candor listens. Without judgment. Without advice. Without telling a soul.</span>
+      <span className="theme-text-secondary"> Candor listens. Without judgment. Without advice. Without telling a soul.</span>
     </p>
     <div className="flex gap-3">
       <button
@@ -139,7 +139,7 @@ const Landing = () => {
       </button>
       <button
         onClick={() => navigate('/login')}
-        className="px-7 py-2.5 rounded-full text-sm border border-white/8 text-[#666] hover:text-[#888] transition-all"
+        className="px-7 py-2.5 rounded-full text-sm border border-white/8 theme-text-secondary hover:theme-text-secondary transition-all"
       >
         log in
       </button>
@@ -149,15 +149,15 @@ const Landing = () => {
   {/* Right side — live preview card */}
   <div className="flex-1 w-full">
     <div className="w-full bg-white/[0.02] border border-[#c9a96e]/12 rounded-2xl p-6 text-left">
-      <p className="text-[9px] tracking-[0.15em] text-[#c9a96e]/50 uppercase mb-3">
+      <p className="text-[9px] tracking-[0.15em] theme-accent/50 uppercase mb-3">
         a journal entry
       </p>
       <p
         ref={typedRef}
-        className="text-sm text-[#777] italic leading-relaxed min-h-[60px]"
+        className="text-sm theme-text-secondary italic leading-relaxed min-h-[60px]"
       />
       <div className="h-px bg-[#c9a96e]/10 my-4" />
-      <p className="text-[9px] tracking-[0.15em] text-[#c9a96e]/50 uppercase mb-2">
+      <p className="text-[9px] tracking-[0.15em] theme-accent/50 uppercase mb-2">
         candor reflects
       </p>
       <p
@@ -172,11 +172,11 @@ const Landing = () => {
       >
         <span
           ref={moodRef}
-          className="text-[10px] px-3 py-1 rounded-full border border-[#c9a96e]/25 bg-[#c9a96e]/8 text-[#c9a96e]"
+          className="text-[10px] px-3 py-1 rounded-full border border-[#c9a96e]/25 bg-[#c9a96e]/8 theme-accent"
         />
         <span
           ref={scoreRef}
-          className="text-[10px] text-[#555]"
+          className="text-[10px] "
         />
       </div>
     </div>
@@ -192,17 +192,17 @@ const Landing = () => {
           { icon: '◎', title: 'Watch yourself grow', desc: 'Mood scores over time reveal patterns you never noticed about yourself.' },
         ].map((f, i) => (
           <div key={i} className="bg-white/[0.02] border border-white/5 rounded-xl p-4">
-            <div className="text-[#c9a96e]/60 text-base mb-2">{f.icon}</div>
+            <div className="theme-accent/60 text-base mb-2">{f.icon}</div>
             <div className="text-xs font-medium text-[#ccc] mb-1">{f.title}</div>
-            <div className="text-[11px] text-[#555] leading-relaxed">{f.desc}</div>
+            <div className="text-[11px] theme-text-muted leading-relaxed">{f.desc}</div>
           </div>
         ))}
       </div>
 
       {/* Footer */}
       <div className="flex justify-between items-center px-8 py-4 border-t border-white/5 max-w-6xl mx-auto w-full">
-        <span className="text-[11px] text-[#333]">no data sold. no ads. ever.</span>
-        <span className="text-[11px] text-[#c9a96e]/40">made with honest intent 🕯️</span>
+        <span className="text-[11px] theme-text-muted">no data sold. no ads. ever.</span>
+        <span className="text-[11px] theme-accent/40">made with honest intent 🕯️</span>
       </div>
     </div>
   );

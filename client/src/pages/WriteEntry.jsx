@@ -30,7 +30,7 @@ const WriteEntry = () => {
 
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
   return (
-    <div className="min-h-screen bg-[#0d0d0f] text-[#e8e4de]">
+    <div className="min-h-screen transition-colors duration-300" style={{background:'var(--bg-primary)',color:'var(--text-primary)'}}>
 
       {/* Navbar */}
       <Navbar showBack backLabel="back to entries" backPath="/dashboard" />
@@ -41,11 +41,11 @@ const WriteEntry = () => {
         <div className="mb-8">
           <h2
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            className="text-3xl font-light text-[#e8e4de] mb-2"
+            className="text-3xl font-light theme-text mb-2"
           >
             what's on your mind?
           </h2>
-          <p className="text-xs text-[#444]">
+          <p className="text-xs theme-text-muted">
             write freely — no one is watching
           </p>
         </div>
@@ -58,13 +58,13 @@ const WriteEntry = () => {
               onChange={(e) => setText(e.target.value)}
               placeholder="Today I felt..."
               rows={10}
-              className="w-full bg-white/[0.02] border border-white/5 rounded-2xl px-6 py-5 text-sm text-[#c8c4be] placeholder-[#333] focus:outline-none focus:border-[#c9a96e]/25 transition-all resize-none leading-relaxed"
+              className="w-full rounded-2xl px-6 py-5 text-sm focus:outline-none transition-all resize-none leading-relaxed" style={{background:'var(--bg-card)',border:'0.5px solid var(--border)',color:'var(--text-primary)'}}
             />
             <div className="flex items-center justify-between mt-2">
-              <span className="text-[10px] text-[#333]">
+              <span className="text-[10px] theme-text-muted">
                 {wordCount} {wordCount === 1 ? 'word' : 'words'}
               </span>
-              <span className="text-[10px] text-[#333]">
+              <span className="text-[10px] theme-text-muted">
                 {text.length} characters
               </span>
             </div>
@@ -102,36 +102,36 @@ const WriteEntry = () => {
         {entry && (
           <div>
             <div className="mb-6 bg-white/[0.02] border border-white/5 rounded-2xl px-6 py-5">
-              <p className="text-sm text-[#777] italic leading-relaxed">
+              <p className="text-sm theme-text-secondary italic leading-relaxed">
                 "{entry.text}"
               </p>
             </div>
 
             <div className="h-px bg-[#c9a96e]/10 mb-8" />
 
-            <p className="text-[9px] tracking-[0.15em] text-[#c9a96e]/50 uppercase mb-4">
+            <p className="text-[9px] tracking-[0.15em] theme-accent/50 uppercase mb-4">
               candor reflects
             </p>
 
             <p
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              className="text-xl font-light text-[#c8c4be] leading-relaxed mb-6 italic"
+              className="text-xl font-light theme-text leading-relaxed mb-6 italic"
             >
               {entry.aiSummary}
             </p>
 
             <div className="flex items-center gap-4 mb-8">
-              <span className="text-[10px] px-3 py-1 rounded-full border border-[#c9a96e]/25 bg-[#c9a96e]/8 text-[#c9a96e]">
+              <span className="text-[10px] px-3 py-1 rounded-full border border-[#c9a96e]/25 bg-[#c9a96e]/8 theme-accent">
                 {entry.mood}
               </span>
-              <span className="text-[10px] text-[#444]">
+              <span className="text-[10px] theme-text-muted">
                 mood score: {entry.aiMoodScore}/10
               </span>
             </div>
 
             <button
               onClick={() => navigate('/dashboard')}
-              className="w-full py-3 rounded-xl text-sm border border-white/8 text-[#555] hover:text-[#777] transition-all"
+              className="w-full py-3 rounded-xl text-sm border border-white/8 theme-text-muted hover:theme-text-secondary transition-all"
             >
               back to entries →
             </button>

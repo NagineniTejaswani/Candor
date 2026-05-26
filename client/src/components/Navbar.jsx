@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import { useTheme } from '../context/ThemeContext.jsx';
 
 const Navbar = ({ showBack, backLabel, backPath, showNewEntry, showLogout }) => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   const handleLogout = () => {
     logout();
@@ -14,7 +16,7 @@ const Navbar = ({ showBack, backLabel, backPath, showNewEntry, showLogout }) => 
     <nav className="flex items-center justify-between px-8 py-5 border-b border-white/5">
       <h1
         style={{ fontFamily: "'Cormorant Garamond', serif" }}
-        className="text-[#c9a96e] text-2xl font-light tracking-widest italic cursor-pointer"
+        className="theme-accent text-2xl font-light tracking-widest italic cursor-pointer"
         onClick={() => navigate('/')}
       >
         Candor
@@ -23,8 +25,8 @@ const Navbar = ({ showBack, backLabel, backPath, showNewEntry, showLogout }) => 
       <div className="flex items-center gap-6">
         {/* Welcome message */}
         {user && showLogout && (
-          <span className="text-xs text-[#555]">
-            welcome, <span className="text-[#888]">{user.name}</span>
+          <span className="text-xs theme-text-muted">
+            welcome, <span className="theme-text-secondary">{user.name}</span>
           </span>
         )}
 
@@ -38,11 +40,20 @@ const Navbar = ({ showBack, backLabel, backPath, showNewEntry, showLogout }) => 
           </button>
         )}
 
+        {/* Theme toggle */}
+        <button
+          onClick={toggleTheme}
+          className="theme-text-muted hover:theme-text-secondarytransition-all text-sm"
+          title={theme === 'dark' ? 'Switch to light' : 'Switch to dark'}
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+
         {/* Back button */}
         {showBack && (
           <button
             onClick={() => navigate(backPath || '/dashboard')}
-            className="text-xs text-[#444] hover:text-[#666] transition-all"
+            className="text-xs theme-text-muted hover:theme-text-secondary transition-all"
           >
             ← {backLabel || 'back'}
           </button>
@@ -52,7 +63,7 @@ const Navbar = ({ showBack, backLabel, backPath, showNewEntry, showLogout }) => 
         {showLogout && (
           <button
             onClick={handleLogout}
-            className="text-xs text-[#444] hover:text-[#666] transition-all"
+            className="text-xs theme-text-muted hover:theme-text-secondary transition-all"
           >
             log out
           </button>

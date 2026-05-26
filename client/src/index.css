@@ -1,3 +1,84 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ── Theme variables ── */
+:root {
+  --bg-primary: #0d0d0f;
+  --bg-secondary: #111113;
+  --bg-card: rgba(255,255,255,0.02);
+  --border: rgba(255,255,255,0.05);
+  --border-accent: rgba(201,169,110,0.25);
+  --text-primary: #e8e4de;
+  --text-secondary: #888;
+  --text-muted: #444;
+  --accent: #c9a96e;
+  --accent-light: #e8c98a;
+  --accent-bg: rgba(201,169,110,0.1);
+  --accent-bg-hover: rgba(201,169,110,0.2);
+}
+
+[data-theme="light"] {
+  --bg-primary: #faf8f5;
+  --bg-secondary: #f0ece4;
+  --bg-card: rgba(0,0,0,0.02);
+  --border: rgba(0,0,0,0.06);
+  --border-accent: rgba(139,100,40,0.3);
+  --text-primary: #1a1814;
+  --text-secondary: #666;
+  --text-muted: #999;
+  --accent: #8b6428;
+  --accent-light: #6b4c1e;
+  --accent-bg: rgba(139,100,40,0.08);
+  --accent-bg-hover: rgba(139,100,40,0.15);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Utility classes using theme variables */
+.theme-bg { background: var(--bg-primary); }
+.theme-bg-secondary { background: var(--bg-secondary); }
+.theme-bg-card { background: var(--bg-card); }
+.theme-border { border: 0.5px solid var(--border); }
+.theme-border-accent { border: 0.5px solid var(--border-accent); }
+.theme-text { color: var(--text-primary); }
+.theme-text-secondary { color: var(--text-secondary); }
+.theme-text-muted { color: var(--text-muted); }
+.theme-accent { color: var(--accent); }
+.theme-accent-light { color: var(--accent-light); }
+.theme-accent-bg { background: var(--accent-bg); }
+
+/* Entry card hover styles for theme support */
+.entry-card {
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  transition: all 0.3s ease !important;
+}
+
+.entry-card:hover {
+  border-color: var(--accent) !important;
+  background: rgba(201, 169, 110, 0.12) !important;
+  box-shadow: 0 0 12px rgba(201, 169, 110, 0.15) !important;
+}
+
+[data-theme="light"] .entry-card:hover {
+  background: rgba(139, 100, 40, 0.12) !important;
+  box-shadow: 0 0 12px rgba(139, 100, 40, 0.15) !important;
+}
+
+.entry-text:hover {
+  color: var(--accent) !important;
+}
+
+.read-arrow:hover {
+  color: var(--accent) !important;
+}
+
+.delete-btn:hover {
+  color: #E24B4A !important;
+  opacity: 0.7;
+}
