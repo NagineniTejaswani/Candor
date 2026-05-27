@@ -12,7 +12,7 @@ import aiRoutes from './routes/ai.js';
 const app = express();
 
 //Middleware
-app.use(cors({origin : "http://localhost:5173"}));
+app.use(cors({origin : ["http://localhost:5173", process.env.CLIENT_URL].filter(Boolean), credentials: true}));
 app.use(express.json());
 
 
@@ -32,7 +32,8 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-connectDB();
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
 });
