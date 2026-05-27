@@ -1,4 +1,4 @@
-# Candor 🕯️
+# Candor
 ### *Your private space to feel.*
 
 > "Write what you can't say to anyone."
@@ -32,14 +32,13 @@ Most people have feelings they can't say out loud — not because they don't wan
 
 ## Features
 
-- 🔐 **JWT Authentication** — secure signup and login
-- 📝 **Journal entries** — write freely, no prompts
-- 🤖 **AI reflection** — Groq's LLaMA 3.1 reads your entry and reflects back your emotional state
-- 🎭 **44 mood categories** — nuanced emotion detection
-- 📊 **Mood scoring** — 1-10 score tracks emotional patterns over time
-- 🗑️ **Entry management** — view, read, delete entries
-- 🌓 **Theme switcher** — dark and light mode
-- 📱 **Mobile responsive** — works on all screen sizes
+- **JWT Authentication** — secure signup and login
+- **Journal entries** — write freely, no prompts
+- **AI reflection** — Groq's LLaMA 3.1 reads your entry and reflects back your emotional state
+- **44 mood categories** — nuanced emotion detection
+- **Mood scoring** — 1-10 score tracks emotional patterns over time
+- **Entry management** — view, read, delete entries
+- **Theme switcher** — dark and light mode
 
 ---
 
